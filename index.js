@@ -24,7 +24,7 @@ app.get(`/api/login`, async (req, res) => {
 
 app.get(`/api/login/{id}`, async (req, res) => {
     try {
-        const result = await pool.query(`SELECT * FROM login WHERE ID = ${id}`);
+        const result = await pool.query(`SELECT * FROM login WHERE id=${id}`);
         res.json(result.rows);
     } catch (error) {
         console.error('Error executing query', error);
