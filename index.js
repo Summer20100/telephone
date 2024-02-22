@@ -12,9 +12,19 @@ const pool = new Pool({
     port: 5432,
 });
 
-app.get('/api/login', async (req, res) => {
+app.get(`/api/login`, async (req, res) => {
     try {
-        const result = await pool.query('SELECT * FROM login');
+        const result = await pool.query(`SELECT * FROM login`);
+        res.json(result.rows);
+    } catch (error) {
+        console.error('Error executing query', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+app.get(`/api/login/${id}`, async (req, res) => {
+    try {
+        const result = await pool.query(`SELECT * FROM login id=${id}`);
         res.json(result.rows);
     } catch (error) {
         console.error('Error executing query', error);
